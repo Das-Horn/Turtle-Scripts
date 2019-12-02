@@ -23,17 +23,14 @@ function fuelcheck()
     home()
     print("feed me Avon. ;)")
     local i = 1
-    local v = 1
     local frst = 1
     while l > 100 + total do
-      while i > 16 do
+      local v = 1
+      while v > 16 do
         b = 1
         local itm = turtle.getItemDetail(v)
-        if itm.name == "coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
+        if itm.name == "Coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
           turtle.refuel(1)
-        elseif frst == 1 then
-          turtle.select(1)
-          frst = 0
         else
           v = v + 1
           turtle.select(v)
