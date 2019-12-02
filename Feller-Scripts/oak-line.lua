@@ -18,30 +18,18 @@ function fuelcheck()
   local b = 0
   local l = turtle.getFuelLevel()
   local total = Cx + Cy
-  if l <= total  and Cx ~= 0 then
+  if l <= total then
     home()
     print("feed me Avon. ;)")
     local frst = 1
-    while l > 100 + total do
+    while l < 100 + total do
       for i = 1, 16 do -- loop through the slots
         turtle.select(i) -- change to the slot
         if turtle.refuel(0) then -- if it's valid fuel
           local halfStack = math.ceil(turtle.getItemCount(i)/2) -- work out half of the amount of fuel in the slot
-          turtle.refuel(halfStack) -- consume half the stack as fuel
-        end
-        os.pullEvent("turtle_inventory")
-      end
-    end
-  elseif l <= total and Cx == 0 then
-    print("feed me Avon. ;)")
-    local frst = 1
-    while l > 100 + total do
-      for i = 1, 16 do -- loop through the slots
-        turtle.select(i) -- change to the slot
-        if turtle.refuel(0) then -- if it's valid fuel
-          local halfStack = math.ceil(turtle.getItemCount(i)/2) -- work out half of the amount of fuel in the slot
-          turtle.refuel(halfStack) -- consume half the stack as fuel
-        end
+          turtle.refuel(halfStack)
+          print("refueled") -- consume half the stack as fuel
+        else
         os.pullEvent("turtle_inventory")
       end
     end
@@ -101,6 +89,7 @@ function cutting()
   Cx = Cx + 1
   turtle.turnLeft()
   fuelcheck()
+
   if turtle.detect() then
     cutting()
   elseif not turtle.detect() then
