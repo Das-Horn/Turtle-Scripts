@@ -15,15 +15,17 @@ function sleep(n)  -- seconds
   return
 end
 function fuelcheck()
+  local b = 0
   local l = turtle.getFuelLevel()
   local total = Cx + Cy
-  if l > total then
+  if l <= total then
     print("Your fuel level is below optimal levels returning home...")
     home()
     print("feed me Avon. ;)")
     local v = 1
     local frst = true
     while l > 500 + total do
+        b = 1
         local itm = turtle.getItemDetail()
         if itm.name == "coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
           turtle.refuel(1)
@@ -36,7 +38,9 @@ function fuelcheck()
         end
     end
   end
-  continueCutting()
+  if b == 1 then
+    continueCutting()
+  end
   return
 end
 -- Function to return the turtle back to its home (turtle faces chest on return)
@@ -82,9 +86,8 @@ function cutting()
   while not turtle.detect() and not turtle.detectDown() do
     turtle.down()
     Cy = Cy - 1
+    fuelcheck()
   end
-  local trs = trs + 1
-  Print("total trees cut down is equal to = "..trs..)
   turtle.turnRight()
   turtle.forward()
   Cx = Cx + 1
