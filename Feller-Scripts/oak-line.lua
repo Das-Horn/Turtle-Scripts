@@ -27,7 +27,7 @@ function fuelcheck()
     while l > 100 + total do
       for i=,16,+1
         b = 1
-        local itm = turtle.getItemDetail()
+        local itm = turtle.getItemDetail(v)
         if itm.name == "coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
           turtle.refuel(1)
         elseif frst == 1 then
