@@ -18,7 +18,7 @@ function fuelcheck()
   local b = 0
   local l = turtle.getFuelLevel()
   local total = Cx + Cy
-  if l <= total  and Cx ~= 0 and Cy ~= 0 then
+  if l <= total  and Cx ~= 0 then
     home()
     print("feed me Avon. ;)")
     local frst = 1
@@ -32,7 +32,7 @@ function fuelcheck()
         os.pullEvent("turtle_inventory")
       end
     end
-  elseif l <= total and Cx == 0 and Cy == 0 then
+  elseif l <= total and Cx == 0 then
     print("feed me Avon. ;)")
     local frst = 1
     while l > 100 + total do
