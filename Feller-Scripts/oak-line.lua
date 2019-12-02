@@ -22,18 +22,13 @@ function fuelcheck()
     print("Your fuel level is below optimal levels returning home...")
     home()
     print("feed me Avon. ;)")
-    local i = 1
     local frst = 1
     while l > 100 + total do
-      local v = 1
-      while v > 16 do
-        b = 1
-        local itm = turtle.getItemDetail(v)
-        if itm.name == "Coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
-          turtle.refuel(1)
-        else
-          v = v + 1
-          turtle.select(v)
+      for i = 1, 16 do -- loop through the slots
+        turtle.select(i) -- change to the slot
+        if turtle.refuel(0) then -- if it's valid fuel
+          local halfStack = math.ceil(turtle.getItemCount(i)/2) -- work out half of the amount of fuel in the slot
+          turtle.refuel(halfStack) -- consume half the stack as fuel
         end
       end
       os.pullEvent("turtle_inventory")
