@@ -23,19 +23,22 @@ function fuelcheck()
     home()
     print("feed me Avon. ;)")
     local v = 1
-    local frst = true
-    while l > 500 + total do
+    local frst = 1
+    while l > 100 + total do
+      for i=,16,+1
         b = 1
         local itm = turtle.getItemDetail()
         if itm.name == "coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
           turtle.refuel(1)
-        elseif frst == true then
+        elseif frst == 1 then
           turtle.select(1)
-          frst = false
+          frst = 0
         else
           v = v + 1
           turtle.select(v)
         end
+      end
+      os.pullEvent("turtle_inventory")
     end
   end
   if b == 1 then
