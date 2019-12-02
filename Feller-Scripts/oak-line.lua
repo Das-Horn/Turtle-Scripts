@@ -22,10 +22,11 @@ function fuelcheck()
     print("Your fuel level is below optimal levels returning home...")
     home()
     print("feed me Avon. ;)")
+    local i = 1
     local v = 1
     local frst = 1
     while l > 100 + total do
-      for i=,16,+1
+      while i > 16 do
         b = 1
         local itm = turtle.getItemDetail(v)
         if itm.name == "coal" or itm.name == "Blaze Rod" or itm.name == "Charcoal" then
