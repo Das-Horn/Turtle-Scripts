@@ -28,7 +28,9 @@ function fuelcheck()
         if turtle.refuel(0) then -- if it's valid fuel
           local halfStack = math.ceil(turtle.getItemCount(i)/2) -- work out half of the amount of fuel in the slot
           turtle.refuel(halfStack)
-          print("refueled") -- consume half the stack as fuel
+          print("refueled. Fuel level is = "turtle.getFurlLevel()) -- consume half the stack as fuel
+          print("The total amount of fuel needed is = " ..total.. + 100)
+          break
         else
         os.pullEvent("turtle_inventory")
       end
