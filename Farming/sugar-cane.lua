@@ -22,6 +22,7 @@ local Flvl = turtle.getFuelLevel()
       end
     end
   end
+  return
 end
 
 function startFarm()
