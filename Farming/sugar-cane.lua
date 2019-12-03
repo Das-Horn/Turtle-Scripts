@@ -4,9 +4,25 @@ local Lx, Ly = 0, 0
 local amt = 0
 
 function begin()
+  initialCheck()
   startFarm()
 end
 
+function initialCheck()
+local Flvl = turtle.getFuelLevel()
+  while Flvl > 100 do
+    Flvl = turtle.getFuelLevel()
+    print("Feed me Daddy. ;)")
+    os.pullEvent("turtle_inventory")
+    for i = 1, 16 do -- loop through the slots
+      turtle.select(i) -- change to the slot
+      if turtle.refuel(0) then -- if it's valid fuel
+        local halfStack = math.ceil(turtle.getItemCount(i)/2) -- work out half of the amount of fuel in the slot
+        turtle.refuel(halfStack) -- consume half the stack as fuel
+      end
+    end
+  end
+end
 
 function startFarm()
   -- Here we make sure that the turtle is facing the correct direcion
@@ -16,10 +32,16 @@ function startFarm()
       print("The name of the block that I am facing is "..block.name)
       turtle.turnLeft()
       i = i + 1
+      if i == 4 then
+        print("error couldn't find any sugar cane adjacant to the turtle")
+      end
     else
-      break
+      phase01()
     end
   end
+end
+
+function phase01()
   turtle.up()
   turtle.up()
   Cy = Cy + 2
@@ -32,6 +54,10 @@ function startFarm()
     Cx = Cx + 1
     turtle.turnRight()
   end
+  phase02()
+end
+
+function phase02()
   turtle.down()
   Cy = Cy - 1
   -- y 2 harvest
@@ -82,6 +108,27 @@ while Cx > 0 do
   Cx = Cx + 1
 end
 turtle.turnRight()
+end
+
+function Cont()
+turtle.turnlRight()
+while Cx < Lx do
+turtle.forward()
+Cx = Cx + 1
+end
+turtle.turnRight()
+while Cy < Ly do
+turtle.up()
+Cy = Cy + 1
+end
+return
+end
+
+local clock = os.clock
+function sleep(n)  -- seconds
+  local t0 = clock()
+  while clock() - t0 <= n do end
+  return
 end
 
 begin()
