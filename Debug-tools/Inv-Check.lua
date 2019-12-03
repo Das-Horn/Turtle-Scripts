@@ -6,7 +6,7 @@ while true do
 
   if key == keys.e then -- if the key pressed was 'e'
     for i=1,16 do
-      
+
     end
     break
   end
