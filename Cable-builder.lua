@@ -55,9 +55,9 @@ print("All checks are posotive")
 
 while true do
   print( "Press E to start construction." )
-  
+
   local event, key = os.pullEvent( "key" ) -- limit os.pullEvent to the 'key' event
-  
+
   if key == keys.e then -- if the key pressed was 'e'
     print( "starting..." )
     break
@@ -67,13 +67,72 @@ end
 
 --                                 Navigation
 
+function directionTurner(x)
+	Ldir = Cdir
+	if x < 0 then
+		while x < 0 do
+			turtle.turnLeft()
+			x = x + 1
+		end
+	elseif x > 0 then
+		while x > 0 do
+			turtle.turnRight()
+			x = x - 1
+		end
+	end
+end
 
+function startX()
+	while Cx < Dx do
+		if turtle.detect() then
+			turtle.dig()
+		end
+		turtle.forward()
+		directionTurner(-2)
+		turtle.place()
+		directionTurner(2)
+	end
+	startY()
+end
 
---                                 Construction
+function startY()
+	if Dy > Hy then
+		directionTurner(1)
+		while Dy > Hy do
+			if turtle.detect() then
+				turtle.dig()
+			end
+			turtle.forward()
+			directionTurner(-2)
+			turtle.place()
+			directionTurner(2)
+		end
+	elseif Dy < Hy then
+		directionTurner(-1)
+		while Dy < Hy do
+			if turtle.detect() then
+				turtle.dig()
+			end
+			turtle.forward()
+			directionTurner(-2)
+			turtle.place()
+			directionTurner(2)
+		end
+	elseif Dy == 0 then
+		startZ()
+	end
+	startZ()
+end
+
+function startZ()
+	while Cz < Dz
+end
+
+--                                 Iventory Nav
 
 --                                 Checks
 
-function fuelCheck() 
+function fuelCheck()
 	print("Refueling")
 	local req = Dist
 	local Flvl = turtle.getFuelLevel()
@@ -91,7 +150,7 @@ function fuelCheck()
 	end
 end
 
--- For the inv check you will have to put the name of the item you would like to construct here 
+-- For the inv check you will have to put the name of the item you would like to construct here
 
 function invCheck()
 	print("Checking to make sure we have enough pipes.")
@@ -111,4 +170,3 @@ function invCheck()
 end
 
 --                                  Misc Functions
-
